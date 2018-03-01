@@ -3,10 +3,13 @@ import Router from 'vue-router'
 import Iview from 'iview'
 // 使用 iview CSS
 import 'iview/dist/styles/iview.css'
+import Element from 'element-ui'
+import "element-ui/lib/theme-chalk/index.css"
 import index from '@/components/index/index.vue'
 
 Vue.use(Router)
 Vue.use(Iview)
+Vue.use(Element)
 
 export default new Router({
   routes: [
