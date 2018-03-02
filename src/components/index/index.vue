@@ -10,6 +10,10 @@
           background-color="#545c64"
           text-color="#fff"
           active-text-color="#ffd04b">
+          <div class="logo"></div>
+          <div class="collapseIcon">
+            <Icon type="navicon-round" size="24" class="icon" :class="rotateIcon" :style="{margin: '20px 20px 0'}"></Icon>
+          </div>
           <el-menu-item index="1">处理中心</el-menu-item>
           <el-submenu index="2">
             <template slot="title">我的工作台</template>
@@ -27,12 +31,12 @@
           <el-menu-item index="4"><a href="#" target="_blank">订单管理</a></el-menu-item>
         </el-menu>
       </el-header>
-      <el-aside>
+      <el-aside style="width:200px;">
         <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
           <el-radio-button :label="false">展开</el-radio-button>
           <el-radio-button :label="true">收起</el-radio-button>
         </el-radio-group>
-        <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
+        <el-menu  class="el-menu-vertical-demo" :unique-opened="uniqueOpened" @open="handleOpen" @close="handleClose"
                  :collapse="isCollapse">
           <el-submenu index="1">
             <template slot="title">
@@ -68,29 +72,66 @@
       </el-aside>
       <el-main></el-main>
     </el-container>
-
-
   </div>
 </template>
 <script>
   export default {
     data() {
       return {
-        isCollapse: true,
+        isCollapse: false,
         activeIndex: '1',
-        activeIndex2: '1'
+        activeIndex2: '1',
+        uniqueOpened: true
       };
     },
     methods: {
       handleSelect(key, keyPath) {
-        console.log(key, keyPath);
+        // console.log(key, keyPath);
       },
       handleOpen(key, keyPath) {
         console.log(key, keyPath);
       },
       handleClose(key, keyPath) {
-        console.log(key, keyPath);
+        // console.log(key, keyPath);
       }
-    }
+    },
+    computed: {
+      rotateIcon() {
+        return [
+          'menu-icon',
+          this.isCollapse ? 'rotate-icon' : ''
+        ];
+      }
+    },
   }
 </script>
+<style>
+  .el-header {
+     padding: 0;
+  }
+  .logo{
+    width: 120px;
+    height: 30px;
+    background: #5b6270;
+    float: left;
+    border-radius: 3px;
+    position: relative;
+    top: 15px;
+    left: 20px;
+    margin-right:35px;
+  }
+  .collapseIcon{
+    float: left;
+    color:#fff;
+  }
+  .collapseIcon:hover{
+      cursor:pointer;
+      border:0;
+  }
+  .rotate-icon {
+    transform: rotate(-90deg);
+  }
+  .icon{
+    border:none;
+  }
+</style>
